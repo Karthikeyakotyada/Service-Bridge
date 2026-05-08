@@ -1,23 +1,31 @@
-import { initializeApp } from "firebase/app";
-import { initializeAuth, getReactNativePersistence } from "firebase/auth";
+import { getApp, getApps, initializeApp } from "firebase/app";
+import { getAuth, initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCTz_UZiAiG2TYJFwq8uHzpn7f6J4YWtwk",
-  authDomain: "servicebridgeapp.firebaseapp.com",
-  projectId: "servicebridgeapp",
-  storageBucket: "servicebridgeapp.firebasestorage.app",
-  messagingSenderId: "231713280952",
-  appId: "1:231713280952:android:fc01c03525bc3fccb2754d" // ← Change this to Android appId
+  apiKey: "AIzaSyDkj12zo5C7J_Xe4ePo2kJCjyqRuUChpmc",
+  authDomain: "servicebridge-bef0a.firebaseapp.com",
+  projectId: "servicebridge-bef0a",
+  storageBucket: "servicebridge-bef0a.firebasestorage.app",
+  messagingSenderId: "506721705710",
+  appId: "1:506721705710:android:292969f08369834d765dff"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-export const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage),
-});
+export const auth = (() => {
+  try {
+    return initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+  } catch {
+    return getAuth(app);
+  }
+})();
 
 export const db = getFirestore(app);
+export const storage = getStorage(app);
 
 export default app;

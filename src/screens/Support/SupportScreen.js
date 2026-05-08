@@ -24,9 +24,9 @@ import { auth, db } from "../../../firebase";
 
 // ✅ YOUR CONTACT DETAILS
 const SUPPORT_CONTACTS = {
-  phone: "+91 8074610410",
-  email: "talluriharshit2006@gmail.com",
-  whatsapp: "8074610410",
+  phone: "+91 7032042390",
+  email: "karthikeyakotyada@gmail.com",
+  whatsapp: "7032042390",
 };
 
 const FAQ_DATA = [
