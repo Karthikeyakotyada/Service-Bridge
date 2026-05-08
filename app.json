@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "Service Bridge",
+    "slug": "service-bridge",
+    "version": "1.0.0",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1AB7BC"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.talluriharshith.servicebridge"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1AB7BC"
+      },
+      "package": "com.talluriharshith.servicebridge",
+      "versionCode": 1,
+      "targetSdkVersion": 34,
+      "compileSdkVersion": 34,
+      "minSdkVersion": 24,
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.VIBRATE",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Service Bridge to use your location to find nearby technicians and spare parts shops."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Service Bridge to access your photos to upload issue images for service requests."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#1AB7BC",
+          "defaultChannel": "default",
+          "sounds": []
+        }
+      ],
+      "expo-splash-screen"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e2e1e432-f9c2-4a6e-b7be-29fe76c97406"
+      },
+      "privacyPolicyUrl": "https://servicebridge.app/privacy-policy"
+    },
+    "owner": "talluriharshith"
+  }
+}

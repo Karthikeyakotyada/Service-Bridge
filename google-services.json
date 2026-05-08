@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "231713280952",
+    "project_id": "servicebridgeapp",
+    "storage_bucket": "servicebridgeapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231713280952:android:fc01c03525bc3fccb2754d",
+        "android_client_info": {
+          "package_name": "com.talluriharshith.servicebridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231713280952-9tanltfj8acmvnk8648aofb04kdsqlnj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.talluriharshith.servicebridge",
+            "certificate_hash": "674dc62bdebd8a7a9095f74dc70a6c6ce47c3381"
+          }
+        },
+        {
+          "client_id": "231713280952-86nbbe7lpdahniaddjakhcgu9q0lfqb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP9eUsrakXNbmW1022l6hGvw7B0e4EDlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231713280952-86nbbe7lpdahniaddjakhcgu9q0lfqb8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
