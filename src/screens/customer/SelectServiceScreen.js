@@ -48,7 +48,7 @@ function ServiceCard({ item, onPress, index }) {
 
   const onPressIn = () => {
     Animated.spring(scale, {
-      toValue: 0.93,
+      toValue: 0.95,
       useNativeDriver: true,
     }).start();
   };
@@ -59,7 +59,6 @@ function ServiceCard({ item, onPress, index }) {
       friction: 3,
       useNativeDriver: true,
     }).start();
-    setTimeout(() => onPress(item), 100);
   };
 
   return (
@@ -74,6 +73,7 @@ function ServiceCard({ item, onPress, index }) {
         activeOpacity={1}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
+        onPress={() => onPress(item)}
         style={[styles.card, { backgroundColor: item.bg }]}
       >
         {/* Icon */}
@@ -142,6 +142,10 @@ export default function SelectServiceScreen({ navigation }) {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        keyboardShouldPersistTaps="handled"
+        nestedScrollEnabled={false}
+        scrollEnabled={true}
       >
         <Text style={styles.hint}>
           {"👆 Tap a service to continue"}
