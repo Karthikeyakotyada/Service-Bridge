@@ -11,8 +11,7 @@ import {
 import { signOut } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
-import * as Notifications from "expo-notifications";
-import * as Device from "expo-device";
+// expo-notifications removed — notifications handled via dev build or removed
 
 const { width } = Dimensions.get("window");
 
@@ -71,50 +70,8 @@ const MENU_ITEMS = [
   },
 ];
 
-// ✅ Register and save Expo push token to Firestore
-async function registerForPushNotifications() {
-  try {
-    // Must be a real device — emulators don't support push
-    if (!Device.isDevice) {
-      console.log("Push notifications require a real device.");
-      return null;
-    }
-
-    // Ask permission
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-
-    if (existingStatus !== "granted") {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-
-    if (finalStatus !== "granted") {
-      console.log("Push notification permission denied.");
-      return null;
-    }
-
-    // Get Expo push token
-    const tokenData = await Notifications.getExpoPushTokenAsync();
-    const token = tokenData.data;
-    console.log("Expo Push Token:", token);
-
-    // Android channel setup
-    if (Platform.OS === "android") {
-      await Notifications.setNotificationChannelAsync("default", {
-        name: "default",
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: "#1AB7BC",
-      });
-    }
-
-    return token;
-  } catch (e) {
-    console.log("Push token error:", e.message);
-    return null;
-  }
-}
+// Push notification helpers removed (we removed `expo-notifications`).
+// If you want push notifications, use a development build and re-enable these helpers.
 
 function MenuCard({ item, navigation }) {
   const scale = useRef(new Animated.Value(1)).current;
@@ -154,7 +111,7 @@ export default function CustomerHomeScreen({ navigation }) {
   const [customerName, setCustomerName] = useState("there");
   const [firstLetter, setFirstLetter] = useState("S");
 
-  // ✅ Fetch customer name + save push token
+  // ✅ Fetch customer name
   useEffect(() => {
     const init = async () => {
       try {
@@ -168,15 +125,6 @@ export default function CustomerHomeScreen({ navigation }) {
           setCustomerName(name);
           setFirstLetter((name || "S").charAt(0).toUpperCase());
         }
-
-        // ✅ Register push token and save to Firestore
-        const token = await registerForPushNotifications();
-        if (token) {
-          await updateDoc(doc(db, "users", user.uid), {
-            expoPushToken: token,
-          });
-          console.log("✅ Push token saved to Firestore");
-        }
       } catch (e) {
         console.log("Init error:", e.message);
       }
@@ -185,17 +133,8 @@ export default function CustomerHomeScreen({ navigation }) {
     init();
   }, []);
 
-  // ✅ Handle notification tap (when app is opened from notification)
-  useEffect(() => {
-    const sub = Notifications.addNotificationResponseReceivedListener((response) => {
-      const data = response.notification.request.content.data;
-      if (data?.ticketId) {
-        // Navigate to ticket details when notification tapped
-        navigation.navigate("TicketDetails", { ticketId: data.ticketId });
-      }
-    });
-    return () => sub.remove();
-  }, []);
+  // Notification response handling removed with `expo-notifications`.
+  // Re-add this listener if you re-enable notifications in a development build.
 
   const headerHeight = scrollY.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE],

@@ -11,7 +11,6 @@ import {
   getDocs, addDoc,
 } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
-import axios from "axios";
 
 const HANDLING_FEE = 50;
 const RADIUS_KM = 10;
@@ -23,23 +22,7 @@ const REJECT_REASONS = [
   "Other",
 ];
 
-// ✅ Send push notification via Expo Push API (free, no backend needed)
-async function sendPushNotification(expoPushToken, title, body, data = {}) {
-  if (!expoPushToken) return;
-  try {
-    await axios.post("https://exp.host/--/api/v2/push/send", {
-      to: expoPushToken,
-      sound: "default",
-      title,
-      body,
-      data,
-    }, {
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (e) {
-    console.log("Push notification error:", e.message);
-  }
-}
+// Notifications removed — push helper deleted
 
 function distanceKm(lat1, lon1, lat2, lon2) {
   if (lat1 == null || lon1 == null || lat2 == null || lon2 == null) return null;
@@ -348,26 +331,7 @@ export default function TechnicianTicketsScreen() {
         createdAt: Date.now(),
       });
 
-      // ✅ Send push notification to customer
-      if (ticket.customerId) {
-        try {
-          const customerSnap = await getDoc(doc(db, "users", ticket.customerId));
-          if (customerSnap.exists()) {
-            const customerData = customerSnap.data();
-            const token = customerData.expoPushToken;
-            if (token) {
-              await sendPushNotification(
-                token,
-                "🔧 Technician Accepted!",
-                "A technician has accepted your service request. They are on their way!",
-                { type: "ticket_accepted", ticketId: ticket.id }
-              );
-            }
-          }
-        } catch (e) {
-          console.log("Could not send notification:", e.message);
-        }
-      }
+      // Notifications disabled: skip sending push to customer
 
       Alert.alert("✅ Ticket Accepted", `₹${HANDLING_FEE} handling fee deducted.`);
     } catch (e) {

@@ -3,41 +3,32 @@
     "name": "Service Bridge",
     "slug": "service-bridge",
     "version": "1.0.0",
-
     "runtimeVersion": {
       "policy": "appVersion"
     },
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#1AB7BC"
     },
-
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.karthikeyakotyada.servicebridge"
     },
-
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1AB7BC"
       },
-
       "package": "com.karthikeyakotyada.servicebridge",
-
       "versionCode": 1,
       "targetSdkVersion": 34,
       "compileSdkVersion": 34,
       "minSdkVersion": 24,
-
       "googleServicesFile": "./google-services.json",
-
       "permissions": [
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_COARSE_LOCATION",
@@ -49,11 +40,9 @@
         "android.permission.RECORD_AUDIO"
       ]
     },
-
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "plugins": [
       [
         "expo-location",
@@ -61,19 +50,19 @@
           "locationAlwaysAndWhenInUsePermission": "Allow Service Bridge to use your location to find nearby technicians and spare parts shops."
         }
       ],
-
       [
         "expo-image-picker",
         {
           "photosPermission": "Allow Service Bridge to access your photos to upload issue images for service requests."
         }
       ],
-
       "expo-splash-screen"
     ],
-
     "extra": {
-      "privacyPolicyUrl": "https://servicebridge.app/privacy-policy"
+      "privacyPolicyUrl": "https://servicebridge.app/privacy-policy",
+      "eas": {
+        "projectId": "ae1a280f-5150-4a4c-9c74-96319001e88a"
+      }
     }
   }
 }

@@ -6,25 +6,7 @@ import {
 import * as Location from "expo-location";
 import { collection, query, where, onSnapshot, updateDoc, doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
-import axios from "axios";
-
-// ✅ Send push notification via Expo Push API (free, no backend needed)
-async function sendPushNotification(expoPushToken, title, body, data = {}) {
-  if (!expoPushToken) return;
-  try {
-    await axios.post("https://exp.host/--/api/v2/push/send", {
-      to: expoPushToken,
-      sound: "default",
-      title,
-      body,
-      data,
-    }, {
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (e) {
-    console.log("Push notification error:", e.message);
-  }
-}
+// Notifications removed — push helper deleted
 
 function formatTime(ts) {
   if (!ts) return "";
@@ -223,25 +205,7 @@ export default function TechnicianMyJobsScreen({ navigation }) {
                 completedAt: Date.now(),
               });
 
-              // ✅ Send push notification to customer
-              if (ticket.customerId) {
-                try {
-                  const customerSnap = await getDoc(doc(db, "users", ticket.customerId));
-                  if (customerSnap.exists()) {
-                    const token = customerSnap.data().expoPushToken;
-                    if (token) {
-                      await sendPushNotification(
-                        token,
-                        "✅ Service Completed!",
-                        "Your service request has been completed. Please rate your experience.",
-                        { type: "ticket_completed", ticketId: ticket.id }
-                      );
-                    }
-                  }
-                } catch (e) {
-                  console.log("Could not send notification:", e.message);
-                }
-              }
+              // Notifications disabled: skip sending push
 
               Alert.alert("✅ Job Completed!", "The job has been marked as completed.");
             } catch (e) {
